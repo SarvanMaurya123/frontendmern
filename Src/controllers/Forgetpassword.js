@@ -19,7 +19,7 @@ const Forgetpassword = asyncHandler(async (req, res) => {
     const token = crypto.randomBytes(20).toString('hex');
     tokens[token] = { email: user.email, userId: user.id, createdAt: new Date() };
 
-    const resetURL = `https://portfolio-ndz7iiqj1-sarvans-projects.vercel.app/confirm-password/${token}`;
+    const resetURL = `${process.env.CORS_ORIGIN}/confirm-password/${token}`;
 
     const message = `
     <h1>You have requested a password reset</h1>
