@@ -23,7 +23,7 @@ const Forgetpassword = asyncHandler(async (req, res) => {
 
     const message = `
     <h1>You have requested a password reset</h1>
-    <p>Please go to this link to reset your password:</p>
+    <p>Please go to this link to reset your password this link valid for 4 min:</p>
     <a href="${resetURL}">${resetURL}</a>
   `;
 
@@ -35,7 +35,6 @@ const Forgetpassword = asyncHandler(async (req, res) => {
         });
         res.status(200).send('Reset password email sent');
     } catch (error) {
-        console.error('There was an error sending the reset password email: ', error);
         throw new ApiError(500, 'Error sending reset password email');
     }
 });
@@ -54,7 +53,7 @@ const resetPassword = asyncHandler(async (req, res) => {
     const tokenCreatedAt = new Date(resetToken.createdAt);
     const now = new Date();
     const timeDifference = now.getTime() - tokenCreatedAt.getTime();
-    const tokenExpirationTime = process.env.REFRESH_TOKEN_EXPIRY_FORGAT || (3 * 60 * 1000); // 3 minutes by default
+    const tokenExpirationTime = process.env.REFRESH_TOKEN_EXPIRY_FORGAT || (5 * 60 * 1000); // 5 minutes by default
 
     if (timeDifference < 0 || timeDifference > tokenExpirationTime) {
         throw new ApiError(404, 'Invalid or expired token'); // Handle invalid or expired token here
