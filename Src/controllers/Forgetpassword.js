@@ -5,7 +5,7 @@ import asyncHandler from '../utils/asyncHandler.js';
 import ApiError from '../utils/ApiError.js';
 import User from '../models/ragister.model.js';
 import tokens from '../utils/token.js';
-
+import { URL } from 'url';
 // Forgot password route
 const Forgetpassword = asyncHandler(async (req, res) => {
     const { email } = req.body;
@@ -19,7 +19,7 @@ const Forgetpassword = asyncHandler(async (req, res) => {
     const token = crypto.randomBytes(20).toString('hex');
     tokens[token] = { email: user.email, userId: user.id, createdAt: new Date() };
 
-    const resetURL = `${process.env.CORS_ORIGIN}/confirm-password/${token}`;
+    const resetURL = `${URL}/confirm-password/${token}`;
 
     const message = `
     <h1>You have requested a password reset</h1>
