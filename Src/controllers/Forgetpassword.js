@@ -5,7 +5,7 @@ import asyncHandler from '../utils/asyncHandler.js';
 import ApiError from '../utils/ApiError.js';
 import User from '../models/ragister.model.js';
 import tokens from '../utils/token.js';
-import { URL } from 'url';
+import { URL } from '../utils/url.js';
 // Forgot password route
 const Forgetpassword = asyncHandler(async (req, res) => {
     const { email } = req.body;
